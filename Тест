@@ -1,0 +1,12 @@
+name=str(input('name:',))
+agents=int(input('agents:',))
+names=list(map(str, input('names:').split()))
+names.append(name)
+names.sort()
+time=0
+i=0
+while names[i]!=name:
+    time+=1
+    i+=1
+time=(time//agents+1)*20
+print('time=',time)
