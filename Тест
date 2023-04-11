@@ -1,5 +1,7 @@
 name=str(input('name:',))
+#введите имя
 agents=int(input('agents:',))
+#введите количество
 names=list(map(str, input('names:').split()))
 names.append(name)
 names.sort()
