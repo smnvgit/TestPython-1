@@ -2,27 +2,33 @@ import telebot
 import random
 from telebot import types
 
-f = open('data/facts.txt', 'r', encoding='UTF-8')
-facts = f.read().split('\n')
-f.close()
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-bot = telebot.TeleBot('TOKEN')
+# Создаем кнопку
+button_start = KeyboardButton('/start')
+
+# Создаем объект для разметки клавиатуры и добавляем нашу кнопку
+markup = ReplyKeyboardMarkup(resize_keyboard=True)
+markup.add(button_start)
+
+
+bot = telebot.TeleBot(token="6208021348:AAE1ecBHepMPkCNB1ZRksdm3qZDnSD1gBxs")
 
 @bot.message_handler(commands=["start"])
 def start(m, res=False):
-markup=types.ReplyKeyboardMarkup(resize_keyboard=True)
-item1=types.KeyboardButton("Right")
-item2=types.KeyboardButton("Left")
-markup.add(item1)
-markup.add(item2)
-bot.send_message(m.chat.id, 'Choose the direction: \nRight - for something\nLeft - for something else', reply_markup=markup)
+	markup=types.ReplyKeyboardMarkup(resize_keyboard=True)
+	item1=types.KeyboardButton("Right")
+	item2=types.KeyboardButton("Left")
+	markup.add(item1)
+	markup.add(item2)
+	bot.send_message(m.chat.id, 'Choose the direction: \nRight - for something\nLeft - for something else', reply_markup=markup)
 
 @bot.message_handler(content_types=["text"])
 def handle_text(message):
-if message.text.strip() == 'Right' :
-answer = random.choice(facts)
-elif message.text.strip() == 'Left':
-answer = "Something else"
-bot.send_message(message.chat.id, answer)
+	if message.text.strip() == 'Right' :
+		answer = "Пупа"
+	elif message.text.strip() == 'Left':
+		answer = "Лупа"
+	bot.send_message(message.chat.id, answer)
 
 bot.polling(none_stop=True, interval=0)
